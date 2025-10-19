@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Thư chúc mừng 20/10</title>
+<style>
+  body {
+    margin: 0;
+    font-family: "Poppins", sans-serif;
+    background: linear-gradient(to bottom right, #ffe6f2, #ffd6e8);
+    overflow: hidden;
+  }
+
+  /* ================= MẬT KHẨU ================= */
+  .password-container, .letter-scene, .letter-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    transition: opacity 1s ease;
+  }
+  .password-box {
+    background: white;
+    padding: 30px 40px;
+    border-radius: 15px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    text-align: center;
+  }
+  input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    width: 200px;
+    font-size: 16px;
+  }
+  button {
+    margin-top: 15px;
+    background-color: #ff66b2;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+
+  /* ================= HIỆU ỨNG CHỮ ================= */
+  .message {
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    font-size: 36px;
+    color: #ff4da6;
+    font-weight: bold;
+    opacity: 0;
+    display: none;
+    animation: popUp 2.5s forwards;
+    text-align: center;
+  }
+  @keyframes popUp {
+    0% { transform: translate(-50%, -50%) scale(0); opacity: 0; }
+    30% { transform: translate(-50%, -50%) scale(1.2); opacity: 1; }
+    80% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+    100% { transform: translate(-50%, -50%) scale(0); opacity: 0; }
+  }
+
+  /* ================= PHONG BÌ ================= */
+  .letter-scene {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    background: url("5F46F35D-F485-480B-8B16-6007F7893A5E.jpeg") no-repeat center center;
+    background-size: cover;
+    perspective: 1500px;
+  }
+
+  .envelope {
+    position: relative;
+    width: 420px;
+    height: 280px;
+    background: #ffb6c1;
+    border-radius: 10px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+    cursor: pointer;
+    overflow: hidden;
+    z-index: 3;
+    transition: all 1s ease;
+  }
+
+  .flap {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: #ff99cc;
+    clip-path: polygon(0 0, 50% 70%, 100% 0);
+    transform-origin: top;
+    transition: transform 1s ease;
+    z-index: 4;
+  }
+
+  .envelope.opened .flap {
+    transform: rotateX(180deg);
+  }
+
+  .envelope.fade-out {
+    opacity: 0;
+    transform: scale(0.6);
+  }
+
+  /* ================= ẢNH TOÀN MÀN HÌNH DỌC ================= */
+  .letter-content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    background: #ffd6e8;
+    animation: fadeInLetter 1.5s forwards;
+    overflow: hidden;
+  }
+
+  @keyframes fadeInLetter {
+    0% { transform: scale(0.6); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+  }
+
+  .letter-content img {
+    height: 100vh;          /* Chiều cao bằng toàn màn hình */
+    width: auto;            /* Chiều rộng tự động, giữ đúng tỉ lệ */
+    max-width: 100vw;       /* Không vượt quá chiều rộng màn hình */
+    object-fit: contain;    /* Giữ nguyên tỉ lệ ảnh */
+    border-radius: 0;       /* Không bo góc để khít viền */
+  }
+
+  /* ================= HOA RƠI ================= */
+  .flower {
+    position: absolute;
+    top: -10px;
+    font-size: 24px;
+    animation: fall 6s linear infinite;
+    opacity: 0.8;
+  }
+  @keyframes fall {
+    0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+    100% { transform: translateY(100vh) rotate(360deg); opacity: 0.6; }
+  }
+
+  /* ================= RESPONSIVE ================= */
+  @media (max-width: 600px) {
+    .message { font-size: 22px; }
+    .password-box { width: 85%; padding: 20px; }
+    input { width: 90%; }
+    .envelope { width: 300px; height: 200px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Mật khẩu -->
+<div class="password-container">
+  <div class="password-box">
+    <h2>Nhập mật khẩu để mở 🥰</h2>
+    <input type="password" id="password" placeholder="Nhập mật khẩu...">
+    <br>
+    <button onclick="checkPassword()">Xác nhận</button>
+  </div>
+</div>
+
+<!-- Hiệu ứng chúc mừng -->
+<div class="message" id="message">💖 Chúc mừng ngày Phụ Nữ Việt Nam 20/10 💖</div>
+
+<!-- Phong bì -->
+<div class="letter-scene" id="scene">
+  <div class="envelope" id="envelope" onclick="openLetter()">
+    <div class="flap"></div>
+  </div>
+</div>
+
+<!-- Ảnh chúc mừng -->
+<div class="letter-content" id="letter">
+  <img src="https://i.imgur.com/QkZ4BXA.jpeg" alt="Chúc mừng 20/10">
+</div>
+
+<script>
+function checkPassword() {
+  const pass = document.getElementById("password").value;
+  if (pass === "2010") {
+    const pwBox = document.querySelector(".password-container");
+    pwBox.style.opacity = 0;
+    setTimeout(() => {
+      pwBox.style.display = "none";
+      setTimeout(() => {
+        const msg = document.getElementById("message");
+        msg.style.display = "block";
+        setTimeout(() => {
+          msg.style.display = "none";
+          document.getElementById("scene").style.display = "flex";
+        }, 2800);
+      }, 500);
+    }, 800);
+  } else {
+    alert("Sai mật khẩu rồi 😅");
+  }
+}
+
+function openLetter() {
+  const envelope = document.getElementById("envelope");
+  envelope.classList.add("opened");
+
+  setTimeout(() => {
+    envelope.classList.add("fade-out");
+  }, 1000);
+
+  setTimeout(() => {
+    document.getElementById("scene").style.display = "none";
+    document.getElementById("letter").style.display = "flex";
+  }, 2200);
+}
+
+// Hoa rơi
+for (let i = 0; i < 18; i++) {
+  const flower = document.createElement("div");
+  flower.classList.add("flower");
+  flower.textContent = "🌸";
+  flower.style.left = Math.random() * 100 + "vw";
+  flower.style.animationDuration = 4 + Math.random() * 5 + "s";
+  document.body.appendChild(flower);
+}
+</script>
+
+</body>
+</html>
